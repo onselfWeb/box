@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#box {
+				width: 500px;
+				height: 500px;
+				background-color: antiquewhite;
+			}
+			
+			#color1{
+				width: 500px;
+				height: 500px;
+				border-left: ;
+			}
+		</style>
+	</head>
+	<body>
+
+		
+		<div id="box" onmousedown="divMove()" onmouseup="divStop()"></div>
+
+		<script type="text/javascript">
+			
+			var timer
+			var flag = false;
+			var box = document.getElementById('box');
+			var marLeft;
+			var marTop;
+			var f = false;
+			function divMove() {
+					document.body.onmousemove = function() {
+						var x = event.clientX;
+						var y = event.clientY;
+						box.style.width = '500px';
+						box.style.height = '500px';
+						
+						marLeft = x - 250;
+						marTop = y - 250;
+						box.style.marginLeft = marLeft + 'px';
+						box.style.marginTop = marTop + 'px';
+					}
+					
+			}
+
+			function divStop() {
+				document.body.onmousemove = function(){};
+				moveBoundary()
+			}
+			
+			function moveBoundary(){
+				if(marLeft <= 0 ){
+					box.style.marginLeft = '0px';
+					box.style.marginTop = '0px';
+					box.style.width = window.innerWidth / 2 + 'px';
+					box.style.height = window.innerHeight + 'px'
+					f = true;
+				}else if(marLeft + 500  >= window.innerWidth){
+					box.style.marginLeft = '50%';
+					box.style.marginTop = '0px';
+					box.style.width = '50%';
+					box.style.height = window.innerHeight + 'px'
+					f = true;
+				}else if(marTop <= 0){
+					box.style.marginLeft = '0px';
+					box.style.marginTop = '0px';
+					box.style.width = window.innerWidth + 'px';
+					box.style.height = window.innerHeight / 2 + 'px'
+					f = true;
+				}else if(marTop + 500 >= window.innerHeight){
+					box.style.marginLeft = '0px';
+					box.style.marginTop = window.innerHeight / 2 + 'px';
+					box.style.width = '100%';
+					box.style.height = window.innerHeight / 2 + 'px'
+					f = true;
+				}
+			}
+			
+			var bgColor = document.getElementById('bgColor')
+			bgColor.style.width = window.innerWidth + 'px';
+			bgColor.style.height = window.innerHeight + 'px';
+		</script>
+	</body>
+</html>
